@@ -1,6 +1,8 @@
 package com.sesi.aula04.controller;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,5 +46,29 @@ public class UsuarioController {
 		return "redirect:/usuarios";
 	}
 	
-	
+	//editar
+	@GetMapping("editarUsuario/{id}")
+	public String editarUsuario(@PathVariable int id, Model modelo) {
+		Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+				if(usuarioOpt.isPresent()) {
+					modelo.addAttribute("usuario",usuarioOpt.get());
+					return "formulario";
+				}else {return "redirect:/usuarios";
+					
+				}
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
